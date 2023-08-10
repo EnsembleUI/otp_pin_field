@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:otp_pin_field/otp_pin_field.dart';
 
 typedef OnDone = void Function(String text);
@@ -11,12 +12,14 @@ class OtpPinField extends StatefulWidget {
   final OtpPinFieldStyle? otpPinFieldStyle;
   final OnDone onSubmit;
   final OnChange onChange;
+  final List<TextInputFormatter>? inputFormatters;
   final OtpPinFieldInputType otpPinFieldInputType;
   final String otpPinInputCustom;
   final OtpPinFieldDecoration otpPinFieldDecoration;
   final TextInputType keyboardType;
   final TextInputAction textInputAction;
   final bool autoFocus;
+  final bool autoComplete;
   final bool? autoFillEnable;
   final bool? phoneNumbersHint;
   final String? smsRegex;
@@ -40,6 +43,8 @@ class OtpPinField extends StatefulWidget {
       this.onCodeChanged,
       this.otpPinFieldStyle = const OtpPinFieldStyle(),
       this.textInputAction = TextInputAction.done,
+      this.inputFormatters,
+      this.autoComplete = true,
       this.otpPinFieldInputType = OtpPinFieldInputType.none,
       this.otpPinFieldDecoration =
           OtpPinFieldDecoration.underlinedPinBoxDecoration,
