@@ -7,7 +7,7 @@ import '../otp_pin_field.dart';
 
 class OtpPinFieldState extends State<OtpPinField>
     with TickerProviderStateMixin, OtpPinAutoFill {
-  late FocusNode _focusNode;
+  late FocusNode focusNode;
   late List<String> pinsInputed;
   late AnimationController _cursorController;
   late Animation<double> _cursorAnimation;
@@ -19,7 +19,7 @@ class OtpPinFieldState extends State<OtpPinField>
   @override
   void initState() {
     super.initState();
-    _focusNode = FocusNode();
+    focusNode = FocusNode();
     pinsInputed = [];
     if (widget.autoFillEnable == true) {
       if (widget.phoneNumbersHint == true) {
@@ -36,7 +36,7 @@ class OtpPinFieldState extends State<OtpPinField>
       pinsInputed.add('');
     }
 
-    _focusNode.addListener(_focusListener);
+    focusNode.addListener(_focusListener);
     _cursorController = AnimationController(
         duration: const Duration(milliseconds: 1000), vsync: this);
     _cursorAnimation = Tween<double>(
@@ -56,8 +56,8 @@ class OtpPinFieldState extends State<OtpPinField>
       cancel();
       _OtpPinFieldAutoFill().unregisterListener();
     }
-    _focusNode.removeListener(_focusListener);
-    _focusNode.dispose();
+    focusNode.removeListener(_focusListener);
+    focusNode.dispose();
     controller.dispose();
     _cursorController.dispose();
     super.dispose();
@@ -98,7 +98,7 @@ class OtpPinFieldState extends State<OtpPinField>
                               FilteringTextInputFormatter.digitsOnly
                             ]
                           : null),
-                  focusNode: _focusNode,
+                  focusNode: focusNode,
                   keyboardType: widget.keyboardType,
                   onSubmitted: (text) {
                     // debugPrint(text);
@@ -147,7 +147,7 @@ class OtpPinFieldState extends State<OtpPinField>
                       if (controller.text.isEmpty) {
                         return;
                       }
-                      _focusNode.requestFocus();
+                      focusNode.requestFocus();
                       controller.text = controller.text
                           .substring(0, controller.text.length - 1);
                       text = controller.text;
@@ -189,7 +189,7 @@ class OtpPinFieldState extends State<OtpPinField>
                         FilteringTextInputFormatter.digitsOnly
                       ]
                     : null),
-            focusNode: _focusNode,
+            focusNode: focusNode,
             textInputAction: widget.textInputAction,
             keyboardType: widget.keyboardType,
             onSubmitted: (text) {
@@ -316,7 +316,7 @@ class OtpPinFieldState extends State<OtpPinField>
 
     return InkWell(
       onTap: () {
-        _focusNode.requestFocus();
+        focusNode.requestFocus();
       },
       child: Container(
           width: widget.fieldWidth,
@@ -375,7 +375,7 @@ class OtpPinFieldState extends State<OtpPinField>
   void _focusListener() {
     if (mounted == true) {
       setState(() {
-        hasFocus = _focusNode.hasFocus;
+        hasFocus = focusNode.hasFocus;
       });
     }
   }
@@ -389,12 +389,12 @@ class OtpPinFieldState extends State<OtpPinField>
   clearOtp() {
     controller.text = '';
     setState(() {
-      _focusNode = FocusNode();
+      focusNode = FocusNode();
       pinsInputed = [];
       for (var i = 0; i < widget.maxLength; i++) {
         pinsInputed.add('');
       }
-      _focusNode.addListener(_focusListener);
+      focusNode.addListener(_focusListener);
       ending = false;
       hasFocus = widget.highlightBorder;
       text = '';
@@ -411,13 +411,13 @@ class OtpPinFieldState extends State<OtpPinField>
       }
       FocusManager.instance.primaryFocus?.unfocus();
       setState(() {
-        _focusNode = FocusNode();
+        focusNode = FocusNode();
         if (code?.isNotEmpty == true) {
           for (var i = 0; i < code!.length; i++) {
             pinsInputed[i] = code![i];
           }
         }
-        _focusNode.addListener(_focusListener);
+        focusNode.addListener(_focusListener);
         ending = true;
         hasFocus = widget.highlightBorder;
         text = code!;
