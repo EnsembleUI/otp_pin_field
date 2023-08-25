@@ -183,7 +183,8 @@ class OtpPinFieldState extends State<OtpPinField>
             readOnly: !(widget.showDefaultKeyboard ?? true),
             autofocus: !kIsWeb ? widget.autoFocus : false,
             enableInteractiveSelection: false,
-            inputFormatters: widget.inputFormatters ?? (widget.keyboardType == TextInputType.number
+            inputFormatters: widget.inputFormatters ??
+                (widget.keyboardType == TextInputType.number
                     ? <TextInputFormatter>[
                         FilteringTextInputFormatter.digitsOnly
                       ]
@@ -303,13 +304,14 @@ class OtpPinFieldState extends State<OtpPinField>
       );
     } else {
       boxDecoration = BoxDecoration(
-          border: Border.all(
-            color: fieldBorderColor,
-            width: 2.0,
-          ),
-          color: fieldBackgroundColor,
-          borderRadius: BorderRadius.circular(
-              widget.otpPinFieldStyle!.fieldBorderRadius));
+        border: Border.all(
+          color: fieldBorderColor,
+          width: widget.otpPinFieldStyle?.fieldBorderWidth ?? 2.0,
+        ),
+        color: fieldBackgroundColor,
+        borderRadius: BorderRadius.circular(
+            widget.otpPinFieldStyle?.fieldBorderRadius ?? 5.0),
+      );
     }
 
     return InkWell(
