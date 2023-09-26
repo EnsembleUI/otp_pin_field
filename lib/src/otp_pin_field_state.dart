@@ -314,33 +314,42 @@ class OtpPinFieldState extends State<OtpPinField>
       );
     }
 
-    return InkWell(
+    Widget field = InkWell(
       onTap: () {
         focusNode.requestFocus();
       },
       child: Container(
-          width: widget.fieldWidth,
-          alignment: Alignment.center,
-          decoration: boxDecoration,
-          child: Stack(
-            children: [
-              showCursorWidget(),
-              Positioned(
-                left: 0,
-                right: 0,
-                top: 0,
-                bottom: 0,
-                child: Center(
-                  child: Text(
-                    _getPinDisplay(i),
-                    style: widget.otpPinFieldStyle!.textStyle,
-                    textAlign: TextAlign.center,
-                  ),
+        width: widget.fieldWidth,
+        alignment: Alignment.center,
+        decoration: boxDecoration,
+        child: Stack(
+          children: [
+            showCursorWidget(),
+            Positioned(
+              left: 0,
+              right: 0,
+              top: 0,
+              bottom: 0,
+              child: Center(
+                child: Text(
+                  _getPinDisplay(i),
+                  style: widget.otpPinFieldStyle!.textStyle,
+                  textAlign: TextAlign.center,
                 ),
               ),
-            ],
-          )),
+            ),
+          ],
+        ),
+      ),
     );
+
+    if (widget.spaceEvenly) {
+      return Expanded(
+        child: field,
+      );
+    }
+
+    return field;
   }
 
   String _getPinDisplay(int position) {

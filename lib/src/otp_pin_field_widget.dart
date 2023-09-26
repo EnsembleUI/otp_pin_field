@@ -20,6 +20,7 @@ class OtpPinField extends StatefulWidget {
   final TextInputAction textInputAction;
   final bool autoFocus;
   final bool autoComplete;
+  final bool spaceEvenly;
   final bool? autoFillEnable;
   final bool? phoneNumbersHint;
   final String? smsRegex;
@@ -45,6 +46,7 @@ class OtpPinField extends StatefulWidget {
       this.textInputAction = TextInputAction.done,
       this.inputFormatters,
       this.autoComplete = true,
+      this.spaceEvenly = false,
       this.otpPinFieldInputType = OtpPinFieldInputType.none,
       this.otpPinFieldDecoration =
           OtpPinFieldDecoration.underlinedPinBoxDecoration,
