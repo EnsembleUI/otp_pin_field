@@ -6,6 +6,7 @@ typedef OnDone = void Function(String text);
 typedef OnChange = void Function(String text);
 
 class OtpPinField extends StatefulWidget {
+  final String value;
   final double fieldHeight;
   final double fieldWidth;
   final int maxLength;
@@ -38,6 +39,7 @@ class OtpPinField extends StatefulWidget {
 
   const OtpPinField(
       {Key? key,
+      this.value = '',
       this.fieldHeight = 50.0,
       this.fieldWidth = 50.0,
       this.maxLength = 4,
