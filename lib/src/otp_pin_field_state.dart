@@ -53,6 +53,14 @@ class OtpPinFieldState extends State<OtpPinField>
         text = widget.value;
         _bindTextIntoWidget(text);
         controller.text = text;
+        ending = text.length == widget.maxLength;
+        if (ending && widget.autoComplete) {
+          hasFocus = false;
+          Future.delayed(const Duration(milliseconds: 50), () {
+            focusNode.unfocus();
+          });
+        }
+        setState(() {});
       }
     });
   }
@@ -206,9 +214,9 @@ class OtpPinFieldState extends State<OtpPinField>
             onChanged: (text) {
               this.text = text;
               // FocusScope.of(context).nextFocus();
-              if (ending && text.length == widget.maxLength) {
-                return;
-              }
+              // if (ending && text.length == widget.maxLength) {
+              //   return;
+              // }
               _bindTextIntoWidget(text);
               setState(() {});
               widget.onChange(text);
