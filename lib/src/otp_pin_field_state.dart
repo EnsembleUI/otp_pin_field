@@ -214,9 +214,9 @@ class OtpPinFieldState extends State<OtpPinField>
             onChanged: (text) {
               this.text = text;
               // FocusScope.of(context).nextFocus();
-              // if (ending && text.length == widget.maxLength) {
-              //   return;
-              // }
+              if (ending && text.length == widget.maxLength) {
+                return;
+              }
               _bindTextIntoWidget(text);
               setState(() {});
               widget.onChange(text);
