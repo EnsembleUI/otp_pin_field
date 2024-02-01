@@ -47,6 +47,22 @@ class OtpPinFieldState extends State<OtpPinField>
       curve: Curves.easeIn,
     ));
     _cursorController.repeat();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (widget.value.isNotEmpty &&
+          (widget.value.length <= widget.maxLength)) {
+        text = widget.value;
+        _bindTextIntoWidget(text);
+        controller.text = text;
+        ending = text.length == widget.maxLength;
+        if (ending && widget.autoComplete) {
+          hasFocus = false;
+          Future.delayed(const Duration(milliseconds: 50), () {
+            focusNode.unfocus();
+          });
+        }
+        setState(() {});
+      }
+    });
   }
 
   @override
