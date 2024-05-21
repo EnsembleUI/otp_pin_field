@@ -1,3 +1,5 @@
+(This repo is deprecated. Please use the monorepo [Ensemble](https://github.com/EnsembleUI/ensemble) instead).
+
 [![Pub](https://img.shields.io/pub/v/otp_pin_field.svg)](https://pub.dartlang.org/packages/otp_pin_field)
 
 # otp_pin_field
